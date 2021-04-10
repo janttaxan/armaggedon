@@ -1,0 +1,35 @@
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 36px 0 24px;
+  margin: 0 0 24px;
+  border-bottom: 1px solid var(--black);
+}
+
+.text {
+  max-width: 414px;
+}
+
+.logo {
+  font-size: 36px;
+  line-height: 48px;
+  margin: 0 0 8px;
+  font-weight: 400;
+}
+
+.description {
+}
+
+.link {
+  border-bottom: 1px solid var(--black);
+}
+
+.link:not(:last-child) {
+  margin-right: 24px;
+}
+
+.active {
+  font-weight: 700;
+  border-color: transparent;
+}
