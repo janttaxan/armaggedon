@@ -1,1 +1,128 @@
-.asteroidListItem {}
+.asteroidListItem {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px;
+  border: 1px solid var(--black);
+  padding: 24px 24px 40px 348px;
+  margin: 0 0 16px;
+  background-image: var(--safe-gradient);
+  overflow: hidden;
+}
+
+.asteroidListItem.isDangerous {
+  background-image: var(--danger-gradient);
+}
+
+
+.info,
+.options {
+  position: relative;
+  z-index: 1;
+}
+
+.info {
+  width: 290px;
+}
+
+.link:hover .title {
+  border-color: transparent;
+}
+
+.title {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+  margin: 0 0 16px;
+  width: fit-content;
+  border-bottom: 2px solid currentColor;
+}
+
+.infoItem {
+  display: flex;
+  justify-content: space-between;
+}
+
+.infoItem:not(:last-child) {
+  margin: 0 0 8px;
+}
+
+.infoDottedLine {
+  flex: 1 1 auto;
+  border-bottom: 1px dotted currentColor;
+  margin: 0 2px 4px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.danger {
+  margin: 0 0 4px;
+}
+
+.dangerValue {
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.button {
+  padding: 14px 16px;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--white);
+  background-color: var(--brand-primary);
+  border-radius: 32px;
+  border: 2px solid transparent;
+}
+
+.button.toBeDestroyed {
+  color: var(--black);
+  background-color: transparent;
+  border-color: var(--brand-primary);
+}
+
+.button:hover {
+  border-color: var(--black);
+}
+
+.dino,
+.meteor {
+  position: absolute;
+}
+
+.dino {
+  bottom: 0;
+  left: 16px;
+  width: 56px;
+  height: 48px;
+}
+
+.meteor > svg {
+  width: 100%;
+  height: 100%;
+}
+
+.meteor.sm {
+  width: 71px;
+  height: 72px;
+  bottom: 90px;
+  left: 122px;
+}
+
+.meteor.md {
+  width: 186px;
+  height: 189px;
+  bottom: 100px;
+  left: 72px;
+}
+
+.meteor.lg {
+  width: 598px;
+  height: 607px;
+  bottom: 70px;
+  left: -100px;
+}

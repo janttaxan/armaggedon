@@ -7,10 +7,11 @@
 }
 
 :root {
+  --white: #FFF;
   --black: #000;
   --brand-primary: #186DD6;
-  --danger-gradient: linear-gradient(90deg, #CFF37D 0%, #7DE88C 100%);
-  --safe-gradient: linear-gradient(90deg, #FFB199 0%, #FF0844 100%);
+  --safe-gradient: linear-gradient(90deg, #CFF37D 0%, #7DE88C 100%);
+  --danger-gradient: linear-gradient(90deg, #FFB199 0%, #FF0844 100%);
 }
 
 body {
@@ -31,4 +32,23 @@ main {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
 }
