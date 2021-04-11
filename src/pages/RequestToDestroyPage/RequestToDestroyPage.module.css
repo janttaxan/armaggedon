@@ -1,0 +1,39 @@
+.heading {
+  padding: 24px 0;
+  font-size: 32px;
+  line-height: 130%;
+  font-weight: 700;
+}
+
+.subtitle {
+  padding: 12px 0;
+}
+
+.item {
+  margin: 0 0 16px;
+}
+
+.itemLink {
+  display: inline-block;
+  font-weight: 700;
+  padding: 4px 0;
+  border-bottom: 2px solid var(--black);
+}
+
+.itemLink:hover {
+  border-color: transparent;
+}
+
+.btn {
+  padding: 14px 16px;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--white);
+  background-color: var(--brand-primary);
+  border-radius: 32px;
+  border: 2px solid transparent;
+}
+
+.btn:hover {
+  border-color: var(--black);
+}

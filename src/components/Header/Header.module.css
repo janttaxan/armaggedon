@@ -3,7 +3,6 @@
   align-items: flex-start;
   justify-content: space-between;
   padding: 36px 0 24px;
-  margin: 0 0 24px;
   border-bottom: 1px solid var(--black);
 }
 
@@ -22,6 +21,7 @@
 }
 
 .link {
+  position: relative;
   border-bottom: 1px solid var(--black);
 }
 
@@ -32,4 +32,18 @@
 .active {
   font-weight: 700;
   border-color: transparent;
+}
+
+.count {
+  display: inline-block;
+  position: absolute;
+  top: -14px;
+  right: -10px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 12px;
+  padding: 3px 6px;
+  border-radius: 5px;
+  background-color: var(--brand-primary);
+  color: var(--white);
 }
