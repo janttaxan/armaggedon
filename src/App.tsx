@@ -6,26 +6,29 @@ import { AsteroidInfoPage } from './pages/AsteroidInfoPage';
 import { AsteroidsListToDestroyPage } from './pages/AsteroidsListToDestroyPage';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import { AsteroidsListContextProvider } from './context/asteroidsListContext';
 
 function App() {
   return (
-    <Router>
-      <Layout>
-        <Header/>
-        <Switch>
-          <Route exact path='/'>
-            <AsteroidsListPage/>
-          </Route>
-          <Route path='/:id'>
-            <AsteroidInfoPage/>
-          </Route>
-          <Route path='/destroy'>
-            <AsteroidsListToDestroyPage/>
-          </Route>
-        </Switch>
-        <Footer/>
-      </Layout>
-    </Router>
+    <AsteroidsListContextProvider>
+      <Router>
+        <Layout>
+          <Header/>
+          <Switch>
+            <Route exact path='/'>
+              <AsteroidsListPage/>
+            </Route>
+            <Route path='/:id'>
+              <AsteroidInfoPage/>
+            </Route>
+            <Route path='/destroy'>
+              <AsteroidsListToDestroyPage/>
+            </Route>
+          </Switch>
+          <Footer/>
+        </Layout>
+      </Router>
+    </AsteroidsListContextProvider>
   );
 }
 

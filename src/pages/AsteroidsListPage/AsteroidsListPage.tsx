@@ -1,28 +1,50 @@
-import { ChangeEvent, useRef, useState } from 'react';
-import { useAsteroidsList } from '../../hooks/useAsteroidsList';
+import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react';
 import { AsteroidListItem } from '../../components/AsteroidListItem';
 import { getAverageSize } from '../../utils/getAverageSize';
 import { getDate } from '../../utils/getDate';
 import { AsteroidsFilter, DistanceType } from '../../components/AsteroidsFilter';
 import { Asteroid } from '../../interfaces/Asteroid';
+import { asteroidsListContext } from '../../context/asteroidsListContext';
+
 
 export const AsteroidsListPage = () => {
-  const bottomOfList = useRef<HTMLDivElement>(null);
   const {
-    list,
-    dangerList,
     isLoading,
+    // errorValue,
+    hasLoadButton,
+
+    asteroidsList,
+    dangerList,
+    // toDestroyList,
     isDangerList,
-    isLoadButton,
-    handleLoad,
+
+    // addObserver,
+    addToDestroyList,
+    removeToDestroyList,
     handleFilter,
-  } = useAsteroidsList(bottomOfList);
+    handleLoad,
+  } = useContext(asteroidsListContext);
 
   const [distanceType, setDistanceType] = useState<DistanceType>(DistanceType.km);
 
-  const handleAdding = (b: boolean) => {
-    console.log(b);
-  };
+  const bottomOfList = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (
+        entry &&
+        entry.isIntersecting &&
+        asteroidsList.length === 0 &&
+        dangerList.length === 0
+      ) {
+        handleLoad();
+      }
+    }, { rootMargin: '50px' });
+
+    if (bottomOfList.current) {
+      observer.observe(bottomOfList.current);
+    }
+  }, []);
 
   const handleRadio = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value !== DistanceType.km && e.target.value !== DistanceType.moon) return;
@@ -38,7 +60,7 @@ export const AsteroidsListPage = () => {
     }
   };
 
-  const getList = (isDanger: boolean) => isDanger ? dangerList : list;
+  const getList = (isDanger: boolean) => isDanger ? dangerList : asteroidsList;
 
   return (
     <main>
@@ -60,14 +82,18 @@ export const AsteroidsListPage = () => {
             distance={getDistance(distanceType, asteroid)}
             distanceType={distanceType}
             isDangerous={asteroid.is_potentially_hazardous_asteroid}
-            toBeDestroyed={false}
-            onAdding={() => handleAdding(true)}
+            toBeDestroyed={asteroid.to_destroy ? asteroid.to_destroy : false}
+            onAdding={
+              asteroid.to_destroy ?
+                () => removeToDestroyList(asteroid) :
+                () => addToDestroyList(asteroid)
+            }
           />
         ))}
         <div ref={bottomOfList}/>
       </ul>
 
-      {isLoadButton && !isLoading && (
+      {hasLoadButton && !isLoading && (
         <button onClick={handleLoad}>Повторить загрузку</button>
       )}
       {isLoading && <span>загрузка...</span>}

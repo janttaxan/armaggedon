@@ -15,6 +15,7 @@ export interface Asteroid {
   name: string,
   nasa_jpl_url: string,
   neo_reference_id: string,
+  to_destroy?: boolean,
 }
 
 interface CloseApproachData {
