@@ -69,7 +69,7 @@ export const AsteroidListItem = (props: Props) => {
           {isDangerous ? 'опасен' : 'не опасен'}
         </strong>
         <button className={buttonClasses} onClick={onAdding}>
-          {!toBeDestroyed ? 'На уничтожение' : 'Добавлен в список'}
+          {!toBeDestroyed ? 'На уничтожение' : 'Убрать из списка'}
         </button>
       </div>
 

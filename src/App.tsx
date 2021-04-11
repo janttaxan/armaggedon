@@ -7,6 +7,7 @@ import { AsteroidsListToDestroyPage } from './pages/AsteroidsListToDestroyPage';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { AsteroidsListContextProvider } from './context/asteroidsListContext';
+import { RequestToDestroyPage } from './pages/RequestToDestroyPage/RequestToDestroyPage';
 
 function App() {
   return (
@@ -18,11 +19,14 @@ function App() {
             <Route exact path='/'>
               <AsteroidsListPage/>
             </Route>
-            <Route path='/:id'>
+            <Route path='/asteroid/:id'>
               <AsteroidInfoPage/>
             </Route>
             <Route path='/destroy'>
               <AsteroidsListToDestroyPage/>
+            </Route>
+            <Route path='/request'>
+              <RequestToDestroyPage/>
             </Route>
           </Switch>
           <Footer/>

@@ -3,8 +3,8 @@ import { AsteroidListItem } from '../../components/AsteroidListItem';
 import { getAverageSize } from '../../utils/getAverageSize';
 import { getDate } from '../../utils/getDate';
 import { AsteroidsFilter, DistanceType } from '../../components/AsteroidsFilter';
-import { Asteroid } from '../../interfaces/Asteroid';
 import { asteroidsListContext } from '../../context/asteroidsListContext';
+import { getDistance } from '../../utils/getDistance';
 
 
 export const AsteroidsListPage = () => {
@@ -15,10 +15,8 @@ export const AsteroidsListPage = () => {
 
     asteroidsList,
     dangerList,
-    // toDestroyList,
     isDangerList,
 
-    // addObserver,
     addToDestroyList,
     removeToDestroyList,
     handleFilter,
@@ -49,15 +47,6 @@ export const AsteroidsListPage = () => {
   const handleRadio = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value !== DistanceType.km && e.target.value !== DistanceType.moon) return;
     setDistanceType(e.target.value);
-  };
-
-  const getDistance = (type: DistanceType, asteroid: Asteroid): number => {
-    switch (type) {
-      case DistanceType.km:
-        return +asteroid.close_approach_data[0].miss_distance.kilometers;
-      case DistanceType.moon:
-        return +asteroid.close_approach_data[0].miss_distance.lunar;
-    }
   };
 
   const getList = (isDanger: boolean) => isDanger ? dangerList : asteroidsList;

@@ -18,6 +18,7 @@ export const asteroidsListContext = createContext<AsteroidsListContext>({
 
   addToDestroyList: NOOP,
   removeToDestroyList: NOOP,
+  clearAllLists: NOOP,
   handleFilter: NOOP,
   handleLoad: NOOP,
 });
@@ -35,13 +36,10 @@ export const AsteroidsListContextProvider = ({ children }: {children: ReactNode}
   const nextLinkRef = useRef('');
 
   const observeCb = useCallback(() => {
+
     async function loadData() {
       setIsLoading(true);
       setErrorValue('');
-
-      if (dangerList.length < 4) {
-        setHasLoadButton(true);
-      }
 
       try {
         // получаем данные сегодняшнего дня, затем каждый следующий запрос возвращает данные за +1 день
@@ -66,6 +64,9 @@ export const AsteroidsListContextProvider = ({ children }: {children: ReactNode}
         setErrorValue(String(e));
       } finally {
         setIsLoading(false);
+        if (dangerList.length < 4) {
+          setHasLoadButton(true);
+        }
       }
     }
 
@@ -108,6 +109,13 @@ export const AsteroidsListContextProvider = ({ children }: {children: ReactNode}
     }, 0);
   };
 
+  const clearAllLists = () => {
+    setAsteroidsList([]);
+    setDangerList([]);
+    setToDestroyList([]);
+    nextLinkRef.current = '';
+  };
+
   const handleFilter = () => {
     setIsDangerList(prevState => !prevState);
   };
@@ -131,6 +139,7 @@ export const AsteroidsListContextProvider = ({ children }: {children: ReactNode}
 
         addToDestroyList,
         removeToDestroyList,
+        clearAllLists,
         handleFilter,
         handleLoad,
       }}

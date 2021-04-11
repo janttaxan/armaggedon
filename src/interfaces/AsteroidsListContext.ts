@@ -12,6 +12,7 @@ export interface AsteroidsListContext {
 
   addToDestroyList: (asteroid: Asteroid) => void,
   removeToDestroyList: (asteroid: Asteroid) => void,
+  clearAllLists: () => void,
   handleFilter: () => void,
   handleLoad: () => void,
 }
