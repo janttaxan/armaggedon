@@ -10,6 +10,7 @@
   --white: #FFF;
   --black: #000;
   --brand-primary: #186DD6;
+  --brand-secondary: #A3C8F5;
   --safe-gradient: linear-gradient(90deg, #CFF37D 0%, #7DE88C 100%);
   --danger-gradient: linear-gradient(90deg, #FFB199 0%, #FF0844 100%);
 }
@@ -43,6 +44,7 @@ button {
   background-color: transparent;
   border: none;
   cursor: pointer;
+  font-size: inherit;
   font-family: inherit;
 }
 

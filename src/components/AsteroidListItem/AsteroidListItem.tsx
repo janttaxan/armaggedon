@@ -2,11 +2,13 @@ import styles from './AsteroidListItem.module.css';
 import classNames from 'classnames';
 import { Dinosaur, Meteor } from '../Icons';
 import { formatNumber } from '../../utils/formatNumber';
+import { DistanceType } from '../AsteroidsFilter';
 
 interface Props {
   name: string,
   date: string,
   distance: number,
+  distanceType: DistanceType,
   size: number,
   isDangerous: boolean,
   toBeDestroyed: boolean,
@@ -14,7 +16,7 @@ interface Props {
 }
 
 export const AsteroidListItem = (props: Props) => {
-  const { name, date, distance, size, isDangerous, toBeDestroyed, onAdding } = props;
+  const { name, date, distance, distanceType, size, isDangerous, toBeDestroyed, onAdding } = props;
 
   const asteroidItemClasses = classNames(
     styles.asteroidListItem,
@@ -48,7 +50,10 @@ export const AsteroidListItem = (props: Props) => {
           <li className={styles.infoItem}>
             <span className={styles.infoTitle}>Расстояние</span>
             <span className={styles.infoDottedLine}/>
-            <span className={styles.infoValue}>{formatNumber(Math.round(Number(distance)))} км</span>
+            <span className={styles.infoValue}>
+              {formatNumber(Math.round(Number(distance)))}
+              {distanceType === DistanceType.km ? ' км' : ' дист. до луны'}
+            </span>
           </li>
           <li className={styles.infoItem}>
             <span className={styles.infoTitle}>Размер</span>
