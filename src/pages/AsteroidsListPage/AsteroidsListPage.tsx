@@ -33,7 +33,8 @@ export const AsteroidsListPage = () => {
         entry &&
         entry.isIntersecting &&
         asteroidsList.length === 0 &&
-        dangerList.length === 0
+        dangerList.length === 0 &&
+        !isLoading
       ) {
         handleLoad();
       }
@@ -42,7 +43,7 @@ export const AsteroidsListPage = () => {
     if (bottomOfList.current) {
       observer.observe(bottomOfList.current);
     }
-  }, []);
+  }, [asteroidsList.length, dangerList.length, handleLoad]);
 
   const handleRadio = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value !== DistanceType.km && e.target.value !== DistanceType.moon) return;
