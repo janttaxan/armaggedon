@@ -71,7 +71,7 @@ export const AsteroidsListContextProvider = ({ children }: {children: ReactNode}
     }
 
     loadData().then();
-  }, [dangerList.length]);
+  }, [dangerList.length, isDangerList]);
 
   const handleAddRemoveToDestroyList = (fn: Dispatch<SetStateAction<Array<Asteroid>>>, id: string, action: 'ADD' | 'REMOVE') => {
     switch (action) {
