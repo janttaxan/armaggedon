@@ -64,7 +64,7 @@ export const AsteroidsListContextProvider = ({ children }: {children: ReactNode}
         setErrorValue(String(e));
       } finally {
         setIsLoading(false);
-        if (dangerList.length < 4) {
+        if (isDangerList && dangerList.length < 4) {
           setHasLoadButton(true);
         }
       }

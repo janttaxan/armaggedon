@@ -3,12 +3,14 @@ import classNames from 'classnames';
 import { Dinosaur, Meteor } from '../Icons';
 import { formatNumber } from '../../utils/formatNumber';
 import { DistanceType } from '../AsteroidsFilter';
+import { Link } from 'react-router-dom';
 
 interface Props {
+  id: string,
   name: string,
   date: string,
   distance: number,
-  distanceType: DistanceType,
+  distanceType?: DistanceType,
   size: number,
   isDangerous: boolean,
   toBeDestroyed: boolean,
@@ -16,7 +18,17 @@ interface Props {
 }
 
 export const AsteroidListItem = (props: Props) => {
-  const { name, date, distance, distanceType, size, isDangerous, toBeDestroyed, onAdding } = props;
+  const {
+    id,
+    name,
+    date,
+    distance,
+    distanceType = DistanceType.km,
+    size,
+    isDangerous,
+    toBeDestroyed,
+    onAdding,
+  } = props;
 
   const asteroidItemClasses = classNames(
     styles.asteroidListItem,
@@ -38,9 +50,9 @@ export const AsteroidListItem = (props: Props) => {
   return (
     <li className={asteroidItemClasses}>
       <div className={styles.info}>
-        <a className={styles.link} href="#qwe">
+        <Link className={styles.link} to={`/asteroid/${id}`}>
           <h3 className={styles.title}>{name}</h3>
-        </a>
+        </Link>
         <ul className={styles.infoList}>
           <li className={styles.infoItem}>
             <span className={styles.infoTitle}>Дата</span>

@@ -1,3 +1,4 @@
+import styles from './AsteroidsListPage.module.css';
 import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react';
 import { AsteroidListItem } from '../../components/AsteroidListItem';
 import { getAverageSize } from '../../utils/getAverageSize';
@@ -43,7 +44,7 @@ export const AsteroidsListPage = () => {
     if (bottomOfList.current) {
       observer.observe(bottomOfList.current);
     }
-  }, [asteroidsList.length, dangerList.length, handleLoad]);
+  }, [asteroidsList.length, dangerList.length, handleLoad, isLoading]);
 
   const handleRadio = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value !== DistanceType.km && e.target.value !== DistanceType.moon) return;
@@ -63,6 +64,7 @@ export const AsteroidsListPage = () => {
         {getList(isDangerList).map((asteroid) => (
           <AsteroidListItem
             key={asteroid.id}
+            id={asteroid.id}
             name={asteroid.name}
             date={getDate(asteroid.close_approach_data[0].close_approach_date)}
             size={getAverageSize(
@@ -81,11 +83,16 @@ export const AsteroidsListPage = () => {
           />
         ))}
         <div ref={bottomOfList}/>
+        {hasLoadButton && !isLoading && (
+          <div className={styles.errorBlock}>
+            <p className={styles.errorBlockMsg}>
+              Загрузка не удалась, или в выгрузке текущего дня не было астероидов.
+              Повторите загрузку.
+            </p>
+            <button className={styles.errorBlockBtn} onClick={handleLoad}>Загрузить</button>
+          </div>
+        )}
       </ul>
-
-      {hasLoadButton && !isLoading && (
-        <button onClick={handleLoad}>Повторить загрузку</button>
-      )}
       {isLoading && <span>загрузка...</span>}
     </main>
   );

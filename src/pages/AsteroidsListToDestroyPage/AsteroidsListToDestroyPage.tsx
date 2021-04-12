@@ -29,6 +29,7 @@ export const AsteroidsListToDestroyPage = () => {
         {toDestroyList.map((asteroid) => (
           <AsteroidListItem
             key={asteroid.id}
+            id={asteroid.id}
             name={asteroid.name}
             date={getDate(asteroid.close_approach_data[0].close_approach_date)}
             distance={getDistance(DistanceType.km, asteroid)}
