@@ -2,7 +2,7 @@ import styles from './AsteroidsListToDestroyPage.module.css';
 import { useContext } from 'react';
 import { asteroidsListContext } from '../../context/asteroidsListContext';
 import { AsteroidListItem } from '../../components/AsteroidListItem';
-import { getDate } from '../../utils/getDate';
+import { getDate } from '../../utils/getDateTime';
 import { getDistance } from '../../utils/getDistance';
 import { DistanceType } from '../../components/AsteroidsFilter';
 import { getAverageSize } from '../../utils/getAverageSize';

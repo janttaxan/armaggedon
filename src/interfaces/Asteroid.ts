@@ -21,10 +21,10 @@ export interface Asteroid {
   orbital_data?: OrbitalData,
 }
 
-interface CloseApproachData {
+export interface CloseApproachData {
   close_approach_date: string,
   close_approach_date_full: string,
-  epoch_date_close_approach: string,
+  epoch_date_close_approach: number,
   miss_distance: {
     astronomical: string,
     kilometers: string,

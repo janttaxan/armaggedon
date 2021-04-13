@@ -37,7 +37,7 @@
 .count {
   display: inline-block;
   position: absolute;
-  top: -14px;
+  top: -11px;
   right: -10px;
   font-size: 12px;
   font-weight: 700;
@@ -46,4 +46,38 @@
   border-radius: 5px;
   background-color: var(--brand-primary);
   color: var(--white);
+}
+
+
+.miniHeader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: var(--white);
+  display: flex;
+  justify-content: space-between;
+  z-index: 20;
+  border-bottom: 2px solid var(--black);
+  transform: translateY(-100%);
+  transition: transform 0.2s ease;
+}
+
+.miniHeaderShow {
+  transform: translateY(0);
+}
+
+.miniHeader .logo {
+  font-size: 24px;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 952px;
+  padding: 0 16px;
+  margin: 0 auto;
 }

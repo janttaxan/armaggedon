@@ -1,11 +1,12 @@
 import styles from './AsteroidInfoPage.module.css';
 import { useParams, useHistory } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
-import { Asteroid } from '../../interfaces/Asteroid';
+import { Asteroid, CloseApproachData } from '../../interfaces/Asteroid';
 import { AsteroidListItem } from '../../components/AsteroidListItem';
-import { getDate } from '../../utils/getDate';
+import { getDate, getDateTime } from '../../utils/getDateTime';
 import { getAverageSize } from '../../utils/getAverageSize';
 import { asteroidsListContext } from '../../context/asteroidsListContext';
+import { formatNumber } from '../../utils/formatNumber';
 
 export const AsteroidInfoPage = () => {
   const [asteroidInfo, setAsteroidInfo] = useState<Asteroid | undefined>(undefined);
@@ -14,6 +15,14 @@ export const AsteroidInfoPage = () => {
 
   const { id } = useParams<{id: string}>();
   const history = useHistory();
+
+  function getClosesApproachDate(arr: Array<CloseApproachData>): string {
+    const beginningOfToday = new Date().setHours(0, 0).valueOf();
+    const futureApproaches = arr.filter((date) =>
+      Number(date.epoch_date_close_approach) > beginningOfToday);
+
+    return futureApproaches[0].close_approach_date;
+  }
 
   useEffect(() => {
     async function loadData() {
@@ -45,7 +54,7 @@ export const AsteroidInfoPage = () => {
             key={asteroidInfo.id}
             id={asteroidInfo.id}
             name={asteroidInfo.name}
-            date={getDate(asteroidInfo.close_approach_data[0].close_approach_date)}
+            date={getDate(getClosesApproachDate(asteroidInfo.close_approach_data))}
             size={getAverageSize(
               asteroidInfo.estimated_diameter.meters.estimated_diameter_max,
               asteroidInfo.estimated_diameter.meters.estimated_diameter_min,
@@ -59,6 +68,46 @@ export const AsteroidInfoPage = () => {
                 () => addToDestroyList(asteroidInfo)
             }
           />
+          <section className={styles.more}>
+            <h2 className={styles.moreHeading}>Все сближения астероида:</h2>
+            <ul className={styles.moreList}>
+              {asteroidInfo.close_approach_data.map((approach) => (
+                <li className={styles.moreItem} key={approach.close_approach_date}>
+                  <strong className={styles.moreDate}>{getDateTime(approach.close_approach_date_full)}</strong>
+                  <ul className={styles.info}>
+                    <li className={styles.infoItem}>
+                      <span className={styles.infoProp}>Орбита</span>
+                      <span className={styles.infoValue}>{approach.orbiting_body}</span>
+                    </li>
+                    <li className={styles.infoItem}>
+                      <span className={styles.infoProp}>Скорость, км/ч</span>
+                      <span className={styles.infoValue}>
+                        {formatNumber(Math.round(+approach.relative_velocity.kilometers_per_hour))}
+                      </span>
+                    </li>
+                    <li className={styles.infoItem}>
+                      <span className={styles.infoProp}>Скорость, км/сек</span>
+                      <span className={styles.infoValue}>
+                        {formatNumber(Math.round(+approach.relative_velocity.kilometers_per_second))}
+                      </span>
+                    </li>
+                    <li className={styles.infoItem}>
+                      <span className={styles.infoProp}>Расстояние до Земли, км</span>
+                      <span className={styles.infoValue}>
+                        {formatNumber(Math.round(+approach.miss_distance.kilometers))}
+                      </span>
+                    </li>
+                    <li className={styles.infoItem}>
+                      <span className={styles.infoProp}>Расстояние до Земли, дист. до луны</span>
+                      <span className={styles.infoValue}>
+                        {formatNumber(Math.round(+approach.miss_distance.lunar))}
+                      </span>
+                    </li>
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          </section>
         </>
       )}
     </main>

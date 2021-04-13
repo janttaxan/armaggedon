@@ -9,6 +9,8 @@
 :root {
   --white: #FFF;
   --black: #000;
+  --grey-light: #e6e7ec;
+  --grey-dark: #989898;
   --brand-primary: #186DD6;
   --brand-secondary: #e3eeff;
   --safe-gradient: linear-gradient(90deg, #CFF37D 0%, #7DE88C 100%);

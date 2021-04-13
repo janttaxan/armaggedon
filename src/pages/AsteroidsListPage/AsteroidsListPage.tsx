@@ -2,7 +2,7 @@ import styles from './AsteroidsListPage.module.css';
 import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react';
 import { AsteroidListItem } from '../../components/AsteroidListItem';
 import { getAverageSize } from '../../utils/getAverageSize';
-import { getDate } from '../../utils/getDate';
+import { getDate } from '../../utils/getDateTime';
 import { AsteroidsFilter, DistanceType } from '../../components/AsteroidsFilter';
 import { asteroidsListContext } from '../../context/asteroidsListContext';
 import { getDistance } from '../../utils/getDistance';
