@@ -27,7 +27,7 @@ export const AsteroidInfoPage = () => {
   useEffect(() => {
     async function loadData() {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/neo/${id}`);
+        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/neo/${id}?api_key=${process.env.REACT_APP_API_KEY}`);
         const data: Asteroid = await response.json();
         setAsteroidInfo(data);
       } catch (e) {
