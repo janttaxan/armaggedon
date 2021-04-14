@@ -39,7 +39,7 @@
 }
 
 .checkbox:not(:disabled):not(:checked) + label:hover::before {
-  border-color: var(--brand-secondary);
+  border-color: var(--grey-dark);
 }
 
 .checkbox:not(:disabled):active + label::before {

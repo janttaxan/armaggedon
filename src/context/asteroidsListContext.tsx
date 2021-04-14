@@ -33,25 +33,33 @@ export const AsteroidsListContextProvider = ({ children }: {children: ReactNode}
   const [toDestroyList, setToDestroyList] = useState<Array<Asteroid>>([]);
   const [isDangerList, setIsDangerList] = useState(false);
 
-  const nextLinkRef = useRef('');
+  // const nextLinkRef = useRef('');
+
+  const setNextDate = (prevDate: Date, nextValue: number): Date => {
+    const newDate = new Date(prevDate);
+    newDate.setDate(prevDate.getDate() + nextValue);
+    return newDate;
+  };
+
+  const startDate = useRef<Date>(new Date());
+  const endDate = useRef<Date>(setNextDate(startDate.current, 1));
 
   const observeCb = useCallback(() => {
-
     async function loadData() {
       setIsLoading(true);
       setErrorValue('');
 
       try {
         // получаем данные сегодняшнего дня, затем каждый следующий запрос возвращает данные за +1 день
-        const response = nextLinkRef.current ?
-          await fetch(nextLinkRef.current) :
-          await fetch(`${process.env.REACT_APP_API_BASE_URL}/feed?start_date=${convertDate(new Date())}&end_date=${convertDate(new Date())}&api_key=${process.env.REACT_APP_API_KEY}`);
+        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/feed?start_date=${convertDate(startDate.current)}&end_date=${convertDate(endDate.current)}&api_key=${process.env.REACT_APP_API_KEY}`);
 
-        const { near_earth_objects, links: { next } }: AsteroidsListResponse = await response.json();
-        nextLinkRef.current = next; // получили ссылку на данные следующего дня
+        const { near_earth_objects }: AsteroidsListResponse = await response.json();
+        // увеличиваем диапазон дат запроса на +1
+        startDate.current = setNextDate(endDate.current, 1);
+        endDate.current = setNextDate(startDate.current, 1);
 
-        // объеденили все массивы объекта "near_earth_objects"
-        const combineArrays = Object.values(near_earth_objects).flat();
+        // объеденили все массивы объекта "near_earth_objects" и "развернули"
+        const combineArrays = Object.values(near_earth_objects).flat().reverse();
         setAsteroidsList(prevList => prevList.concat(...combineArrays));
 
         const dangerAteroids = combineArrays.filter((asteroid) => asteroid.is_potentially_hazardous_asteroid);
@@ -64,14 +72,15 @@ export const AsteroidsListContextProvider = ({ children }: {children: ReactNode}
         setErrorValue(String(e));
       } finally {
         setIsLoading(false);
-        if (dangerList.length < 4) {
+        if (isDangerList && dangerList.length < 4) {
           setHasLoadButton(true);
         }
       }
     }
 
     loadData().then();
-  }, [dangerList.length]);
+
+  }, [dangerList.length, isDangerList]);
 
   const handleAddRemoveToDestroyList = (fn: Dispatch<SetStateAction<Array<Asteroid>>>, id: string, action: 'ADD' | 'REMOVE') => {
     switch (action) {
@@ -113,11 +122,14 @@ export const AsteroidsListContextProvider = ({ children }: {children: ReactNode}
     setAsteroidsList([]);
     setDangerList([]);
     setToDestroyList([]);
-    nextLinkRef.current = '';
+    startDate.current = new Date();
   };
 
   const handleFilter = () => {
     setIsDangerList(prevState => !prevState);
+    if (isDangerList && dangerList.length <= 3) {
+      setHasLoadButton(true);
+    }
   };
 
   const handleLoad = () => {

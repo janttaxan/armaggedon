@@ -1,0 +1,52 @@
+.head {
+  padding: 8px;
+  margin: 0 0 24px;
+  background-color: var(--grey-light);
+}
+
+.more {
+  padding: 24px 0;
+}
+
+.moreHeading {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 24px;
+}
+
+.moreItem {
+  font-size: 14px;
+  padding: 12px 0 24px;
+}
+
+.moreDate {
+  display: inline-block;
+  font-size: 14px;
+  margin: 0 0 4px;
+}
+
+.moreItem:not(:last-child) {
+  border-bottom: 2px solid var(--black);
+}
+
+.info {
+
+}
+
+.infoItem {
+  display: flex;
+  padding: 4px 0;
+
+}
+
+.infoItem:not(:last-child) {
+  border-bottom: 1px solid var(--grey-light);
+}
+
+.infoProp {
+  width: 334px;
+  margin-right: 16px;
+}
+
+.infoValue {
+}

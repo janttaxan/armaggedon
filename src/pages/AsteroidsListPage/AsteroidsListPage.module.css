@@ -1,0 +1,21 @@
+.errorBlock {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  padding: 12px 16px;
+  border: 1px solid #EFE4B5;
+  background-color: #FFFBDF;
+  border-radius: 8px;
+}
+
+.errorBlockMsg {
+  max-width: 490px;
+}
+
+.errorBlockBtn {
+  padding: 8px 12px;
+  border-radius: 12px;
+  background-color: var(--brand-primary);
+  color: var(--white);
+}

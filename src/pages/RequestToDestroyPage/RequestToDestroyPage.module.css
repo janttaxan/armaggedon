@@ -10,7 +10,16 @@
 }
 
 .item {
+  display: flex;
+  align-items: center;
   margin: 0 0 16px;
+}
+
+.itemDelete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
 }
 
 .itemLink {

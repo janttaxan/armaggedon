@@ -9,7 +9,7 @@ const asteroidsTitles = ['астероид', 'астероида', 'астеро
 export const RequestToDestroyPage = () => {
   const [earthIsSaved, setEarthIsSaved] = useState(false);
 
-  const { toDestroyList, clearAllLists } = useContext(asteroidsListContext);
+  const { toDestroyList, clearAllLists, removeToDestroyList } = useContext(asteroidsListContext);
 
   const handleSaved = () => {
     setEarthIsSaved(true);
@@ -27,12 +27,22 @@ export const RequestToDestroyPage = () => {
           <ul className={styles.list}>
             {toDestroyList.map((asteroid) => (
               <li className={styles.item} key={asteroid.id}>
-                <Link className={styles.itemLink} to='/'>{asteroid.name}</Link>
+                <button className={styles.itemDelete} onClick={() => removeToDestroyList(asteroid)}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"
+                      fill="black"/>
+                  </svg>
+                </button>
+                <Link className={styles.itemLink} to={`/asteroid/${asteroid.id}`}>{asteroid.name}</Link>
               </li>
             ))}
           </ul>
           {toDestroyList.length !== 0 && (
             <button className={styles.btn} onClick={handleSaved}>Спасти землю!</button>
+          )}
+          {toDestroyList.length === 0 && (
+            <Link className={styles.itemLink} to='/'>К списку астероидов</Link>
           )}
         </>
       )}

@@ -2,7 +2,7 @@ import styles from './AsteroidsListToDestroyPage.module.css';
 import { useContext } from 'react';
 import { asteroidsListContext } from '../../context/asteroidsListContext';
 import { AsteroidListItem } from '../../components/AsteroidListItem';
-import { getDate } from '../../utils/getDate';
+import { getDate } from '../../utils/getDateTime';
 import { getDistance } from '../../utils/getDistance';
 import { DistanceType } from '../../components/AsteroidsFilter';
 import { getAverageSize } from '../../utils/getAverageSize';
@@ -29,6 +29,7 @@ export const AsteroidsListToDestroyPage = () => {
         {toDestroyList.map((asteroid) => (
           <AsteroidListItem
             key={asteroid.id}
+            id={asteroid.id}
             name={asteroid.name}
             date={getDate(asteroid.close_approach_data[0].close_approach_date)}
             distance={getDistance(DistanceType.km, asteroid)}

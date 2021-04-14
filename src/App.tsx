@@ -8,11 +8,13 @@ import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { AsteroidsListContextProvider } from './context/asteroidsListContext';
 import { RequestToDestroyPage } from './pages/RequestToDestroyPage/RequestToDestroyPage';
+import { ScrollToTop } from './components/ScrollToTop/ScrollToTop';
 
 function App() {
   return (
     <AsteroidsListContextProvider>
       <Router>
+        <ScrollToTop/>
         <Layout>
           <Header/>
           <Switch>
