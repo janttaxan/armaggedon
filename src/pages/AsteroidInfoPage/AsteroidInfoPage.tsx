@@ -87,7 +87,7 @@ export const AsteroidInfoPage = () => {
               <ul className={styles.moreList}>
                 {asteroidInfo.close_approach_data.map((approach) => (
                   <li className={styles.moreItem} key={approach.close_approach_date}>
-                    <strong className={styles.moreDate}>{getDateTime(approach.close_approach_date_full)}</strong>
+                    <strong className={styles.moreDate}>{getDateTime(approach.epoch_date_close_approach)}</strong>
                     <ul className={styles.info}>
                       <li className={styles.infoItem}>
                         <span className={styles.infoProp}>Орбита</span>
@@ -106,13 +106,13 @@ export const AsteroidInfoPage = () => {
                       </span>
                       </li>
                       <li className={styles.infoItem}>
-                        <span className={styles.infoProp}>Расстояние до Земли, км</span>
+                        <span className={styles.infoProp}>Расстояние, км</span>
                         <span className={styles.infoValue}>
                         {formatNumber(Math.round(+approach.miss_distance.kilometers))}
                       </span>
                       </li>
                       <li className={styles.infoItem}>
-                        <span className={styles.infoProp}>Расстояние до Земли, дист. до луны</span>
+                        <span className={styles.infoProp}>Расстояние, дист. до луны</span>
                         <span className={styles.infoValue}>
                         {formatNumber(Math.round(+approach.miss_distance.lunar))}
                       </span>
