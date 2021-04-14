@@ -37,7 +37,7 @@ export const AsteroidsFilter = ({ isDanger, onChangeCheckbox, onChangeRadio }: P
             onChange={onChangeRadio}
             defaultChecked
           />
-          <span>в километрах</span>,&nbsp;
+          <span>в&nbsp;километрах</span>,&nbsp;
         </label>
         <label className={styles.radio}>
           <input
