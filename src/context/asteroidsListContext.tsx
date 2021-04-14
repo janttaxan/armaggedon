@@ -45,7 +45,6 @@ export const AsteroidsListContextProvider = ({ children }: {children: ReactNode}
   const endDate = useRef<Date>(setNextDate(startDate.current, 1));
 
   const observeCb = useCallback(() => {
-
     async function loadData() {
       setIsLoading(true);
       setErrorValue('');
@@ -80,6 +79,7 @@ export const AsteroidsListContextProvider = ({ children }: {children: ReactNode}
     }
 
     loadData().then();
+
   }, [dangerList.length, isDangerList]);
 
   const handleAddRemoveToDestroyList = (fn: Dispatch<SetStateAction<Array<Asteroid>>>, id: string, action: 'ADD' | 'REMOVE') => {
@@ -127,6 +127,9 @@ export const AsteroidsListContextProvider = ({ children }: {children: ReactNode}
 
   const handleFilter = () => {
     setIsDangerList(prevState => !prevState);
+    if (isDangerList && dangerList.length <= 3) {
+      setHasLoadButton(true);
+    }
   };
 
   const handleLoad = () => {

@@ -6,6 +6,7 @@ import { getDate } from '../../utils/getDateTime';
 import { AsteroidsFilter, DistanceType } from '../../components/AsteroidsFilter';
 import { asteroidsListContext } from '../../context/asteroidsListContext';
 import { getDistance } from '../../utils/getDistance';
+import { Loader } from '../../components/Loader';
 
 
 export const AsteroidsListPage = () => {
@@ -93,7 +94,7 @@ export const AsteroidsListPage = () => {
           </div>
         )}
       </ul>
-      {isLoading && <span>загрузка...</span>}
+      {isLoading && <Loader/>}
     </main>
   );
 };
