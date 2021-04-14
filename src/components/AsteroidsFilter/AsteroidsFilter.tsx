@@ -47,7 +47,7 @@ export const AsteroidsFilter = ({ isDanger, onChangeCheckbox, onChangeRadio }: P
             value={DistanceType.moon}
             onChange={onChangeRadio}
           />
-          <span>в дистанциях до луны</span>
+          <span>в&nbsp;дистанциях до&nbsp;луны</span>
         </label>
       </div>
     </div>

@@ -47,7 +47,7 @@ export const AsteroidsListToDestroyPage = () => {
 
       {toDestroyList.length === 0 && (
         <div className={styles.empty}>
-          <span>Список астероидов сейчас пуст...</span>
+          <span className={styles.emptyText}>Список астероидов сейчас пуст...</span>
           <Link className={styles.link} to="/">Выбрать астероиды!</Link>
         </div>
       )}
