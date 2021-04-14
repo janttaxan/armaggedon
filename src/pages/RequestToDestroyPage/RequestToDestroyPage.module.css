@@ -46,3 +46,9 @@
 .btn:hover {
   border-color: var(--black);
 }
+
+@media all and (max-width: 680px) {
+  .heading {
+    font-size: 24px;
+  }
+}

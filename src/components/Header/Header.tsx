@@ -48,7 +48,7 @@ export const Header = () => {
       </header>
 
       <header className={miniHeaderClasses}>
-        <div className={styles.container}>
+        <div className={styles.miniHeaderContainer}>
           <h2 className={styles.logo}>ARMAGGEDON V</h2>
           <nav className={styles.nav}>
             <NavLink exact className={styles.link} activeClassName={styles.active} to='/'>
